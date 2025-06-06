@@ -218,7 +218,7 @@ def login_user():
         if result.rows:
             # Yes, so check password
             user = result.rows[0]
-            hash = user["password_hash"]
+            hash = user["password_hash"] 
 
             # Hash matches?
             if check_password_hash(hash, password):
