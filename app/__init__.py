@@ -129,6 +129,9 @@ def add_a_thing():
     name = html.escape(name)
     price = html.escape(price)
 
+    # Get the user_id from the session
+    user_id= session["user_id"]
+
     with connect_db() as client:
         # Add the thing to the DB
         sql = "INSERT INTO things (name, price, user_id) VALUES (?, ?, ?)"
@@ -149,6 +152,8 @@ def add_a_thing():
 @handle_db_errors
 def delete_a_thing(id):
     with connect_db() as client:
+        # Get user id from session
+        used_id = session ["user_id"]
         # Delete the thing from the DB only if we own it
         sql = "DELETE FROM things WHERE id=? AND user_id=?"
         values = [id, session["user_id"]]
